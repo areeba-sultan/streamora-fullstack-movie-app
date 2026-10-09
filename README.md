@@ -297,9 +297,6 @@ BS Software Engineering
 
 Superior University Lahore
 
-GitHub:
-https://github.com/your-username
-
 LinkedIn:
 https://www.linkedin.com/in/areeba-sultan-01929b353/
 
