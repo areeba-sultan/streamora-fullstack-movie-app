@@ -10,6 +10,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { MoviesService } from './movie.service';
+import { Query } from '@nestjs/common';
 
 @Controller('movies') // <-- ROUTE = /movies
 export class MoviesController {
@@ -60,4 +61,9 @@ export class MoviesController {
   // bulkImport(@Headers('admin-key') key: string) {
   //   return this.movieService.bulkImport(key);
   // }
+  @Get('search')
+  searchMovies(@Query('keyword') keyword: string) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
+    return this.movieService.searchMovies(keyword);
+  }
 }

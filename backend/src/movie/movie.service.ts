@@ -7,6 +7,9 @@ import { AdminService } from 'src/admin/admin.service';
 
 @Injectable()
 export class MoviesService {
+  searchMovies(keyword: string) {
+    throw new Error('Method not implemented.');
+  }
   constructor(
     @InjectRepository(Movie)
     private readonly movieRepo: Repository<Movie>,
