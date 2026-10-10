@@ -1,46 +1,61 @@
-
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Navbar from "../../../../components/bar/Navbar";
 import Homefooter from "../../../../components/footer/Homefooter";
-import moviesData from "../../../../dummydata/moviesData";
 import { Play, Pause, Volume2, VolumeX, Heart, Share2 } from "lucide-react";
 import Image from "next/image";
 import ReactPlayer from "react-player";
 
 export default function SeriesDetailPage() {
   const params = useParams();
-  const seriesId = parseInt(params.id);
+  const seriesId = params.id;
 
-  const series = moviesData.find((s) => s.id === seriesId);
-
-  const videoRef = useRef(null);
+  const [series, setSeries] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(1);
 
-  if (!series) return <p className="text-white p-10">Web series not found</p>;
+  useEffect(() => {
+    const fetchSeries = async () => {
+      try {
+        const response = await fetch(
+          `https://streamora-fullstack-movie-app.onrender.com/movies/${seriesId}`
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch series");
+        }
+
+        const data = await response.json();
+        setSeries(data);
+      } catch (error) {
+        console.error("Error fetching series:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (seriesId) {
+      fetchSeries();
+    }
+  }, [seriesId]);
+
+  if (loading) {
+    return <p className="text-white p-10">Loading web series...</p>;
+  }
+
+  if (!series) {
+    return <p className="text-white p-10">Web series not found</p>;
+  }
 
   const togglePlay = () => {
-    if (!videoRef.current) return;
-    if (isPlaying) {
-      videoRef.current.pause();
-    } else {
-      videoRef.current.play();
-    }
-    setIsPlaying(!isPlaying);
+    setIsPlaying((prev) => !prev);
   };
 
   const toggleMute = () => {
-    if (!videoRef.current) return;
-    if (videoRef.current.volume === 0) {
-      videoRef.current.volume = 1;
-      setVolume(1);
-    } else {
-      videoRef.current.volume = 0;
-      setVolume(0);
-    }
+    setVolume((prev) => (prev === 0 ? 1 : 0));
   };
 
   return (
@@ -58,7 +73,9 @@ export default function SeriesDetailPage() {
 
         <div className="absolute inset-0 flex flex-col justify-center px-16">
           <h1 className="text-5xl font-extrabold mb-4">{series.title}</h1>
-          <p className="text-gray-300 max-w-2xl text-lg">{series.description}</p>
+          <p className="text-gray-300 max-w-2xl text-lg">
+            {series.description}
+          </p>
 
           <div className="flex gap-4 mt-6">
             <button
@@ -83,12 +100,13 @@ export default function SeriesDetailPage() {
       <div className="flex justify-center mt-10">
         <div className="relative w-full max-w-4xl">
           <ReactPlayer
-              url={moviesData.video}      // YouTube link
-              playing={isPlaying}
-              controls
-              width="100%"
-              height="100%"
-            />
+            src={series.video}
+            playing={isPlaying}
+            controls
+            volume={volume}
+            width="100%"
+            height="100%"
+          />
 
           {/* Play/Pause */}
           <button
@@ -113,13 +131,19 @@ export default function SeriesDetailPage() {
         <h2 className="text-3xl font-bold">Movie Details</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-300">
-          <p><span className="font-bold text-white">Genre:</span> {series.genre}</p>
-          <p><span className="font-bold text-white">Year:</span> {series.year}</p>
-          <p><span className="font-bold text-white">Rating:</span> ⭐ {series.rating}/5</p>
+          <p>
+            <span className="font-bold text-white">Genre:</span> {series.genre}
+          </p>
+          <p>
+            <span className="font-bold text-white">Year:</span> {series.releasedyear}
+          </p>
+          <p>
+            <span className="font-bold text-white">Rating:</span> ⭐ {series.rating}/5
+          </p>
         </div>
 
         {/* Seasons / Episodes (if TV show) */}
-        {series.seasons && series.seasons.length > 0 && (
+        {Array.isArray(series.seasons) && series.seasons.length > 0 && (
           <div className="mt-10">
             <h2 className="text-2xl font-bold mb-4">Episodes</h2>
 
@@ -130,7 +154,7 @@ export default function SeriesDetailPage() {
                 </h3>
 
                 <div className="space-y-2">
-                  {season.episodes.map((ep) => (
+                  {season.episodes?.map((ep) => (
                     <div
                       key={ep.ep}
                       className="flex justify-between bg-[#18181b] p-3 rounded-lg border border-gray-700"
@@ -138,7 +162,12 @@ export default function SeriesDetailPage() {
                       <span>
                         Ep {ep.ep}: {ep.title} ({ep.duration})
                       </span>
-                      <a href={ep.video} target="_blank" className="text-blue-400 hover:underline">
+                      <a
+                        href={ep.video}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-400 hover:underline"
+                      >
                         Watch
                       </a>
                     </div>

@@ -101,12 +101,13 @@ export default function Navbar() {
         {/* Right side */}
         <div className="flex items-center gap-4">
           <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.92 }}
-            aria-label="Search"
-            className="text-gray-300 transition-colors duration-200 hover:text-red-500"
-          >
-            <FaSearch className="text-lg" />
+             onClick={() => router.push("/search")}
+             whileHover={{ scale: 1.1 }}
+             whileTap={{ scale: 0.92 }}
+             aria-label="Search"
+             className="text-gray-300 transition-colors duration-200 hover:text-red-500"
+            >
+              <FaSearch className="text-lg" />
           </motion.button>
 
           <motion.button
@@ -138,7 +139,7 @@ export default function Navbar() {
           </motion.div>
            {openProfile && (
         <motion.div
-           nitial={{ opacity: 0, y: -5 }}
+           initial={{ opacity: 0, y: -5 }}
            animate={{ opacity: 1, y: 0 }}
            className="absolute right-0 top-10 mt-4 w-40 rounded-xl bg-black/60 backdrop-blur-md p-2 shadow-xl z-50"
           >
