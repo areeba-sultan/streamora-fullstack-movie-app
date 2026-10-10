@@ -13,7 +13,7 @@ export default function DeletePage() {
     try {
       setLoading(true);
 
-      const res = await fetch("http://localhost:3000/movies/list");
+      const res = await fetch("https://streamora-fullstack-movie-app.onrender.com/movies/list");
       const data = await res.json();
 
       setMovies(data);
@@ -37,7 +37,7 @@ export default function DeletePage() {
     try {
       const adminKey = localStorage.getItem("adminKey");
 
-      const res = await fetch(`http://localhost:3000/movies/delete/${id}`, {
+      const res = await fetch(`https://streamora-fullstack-movie-app.onrender.com/movies/delete/${id}`, {
         method: "DELETE",
         headers: {
           "admin-key": adminKey,

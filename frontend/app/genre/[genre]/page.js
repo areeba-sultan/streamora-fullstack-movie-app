@@ -17,7 +17,7 @@ export default function GenrePage() {
   useEffect(() => {
   const fetchMovies = async () => {
     try {
-      const res = await fetch("http://localhost:3000/movies/list");
+      const res = await fetch("https://streamora-fullstack-movie-app.onrender.com/movies/list");
       const data = await res.json();
       console.log("Genres in DB:", data.map(d => d.genre));
       setMoviesData(data);

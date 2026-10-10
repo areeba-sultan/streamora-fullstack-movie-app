@@ -27,7 +27,7 @@ export default function SignupPage() {
     }
 
     try {
-      const res = await fetch("http://localhost:3000/users/signup", {
+      const res = await fetch("https://streamora-fullstack-movie-app.onrender.com/users/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),

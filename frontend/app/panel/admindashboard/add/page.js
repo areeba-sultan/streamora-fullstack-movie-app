@@ -45,7 +45,7 @@ export default function AddMovie() {
     try {
       const adminKey = localStorage.getItem("adminKey");
 
-      const res = await fetch("http://localhost:3000/movies/create", {
+      const res = await fetch("https://streamora-fullstack-movie-app.onrender.com/movies/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

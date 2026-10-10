@@ -10,7 +10,7 @@ export default function AllMovies() {
   const fetchMovies = async () => {
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:3000/movies/list");
+      const res = await fetch("https://streamora-fullstack-movie-app.onrender.com/movies/list");
       const data = await res.json();
       setMovies(data);
     } catch (err) {

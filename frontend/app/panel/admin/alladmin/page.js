@@ -25,7 +25,7 @@ export default function AllAdminsPage() {
 
   async function fetchAdmins() {
   try {
-    const res = await fetch("http://localhost:3000/admin/all", {
+    const res = await fetch("https://streamora-fullstack-movie-app.onrender.com/admin/all", {
       headers: {
         "admin-key": localStorage.getItem("adminKey") || "",
       },
@@ -49,7 +49,7 @@ export default function AllAdminsPage() {
   if (!confirmDelete) return;
 
   const res = await fetch(
-  `http://localhost:3000/admin/${id}`,
+  `https://streamora-fullstack-movie-app.onrender.com/admin/${id}`,
   {
     method: "DELETE",
     headers: {
@@ -71,7 +71,7 @@ async function updateAdmin() {
   try {
 
     const res = await fetch(
-      `http://localhost:3000/admin/${editAdmin.id}`,
+      `https://streamora-fullstack-movie-app.onrender.com/admin/${editAdmin.id}`,
       {
         method:"PATCH",
         headers:{

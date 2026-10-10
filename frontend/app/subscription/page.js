@@ -9,7 +9,7 @@ export default function SubscriptionPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:3000/subscription")
+    fetch("https://streamora-fullstack-movie-app.onrender.com/subscription")
       .then(res => res.json())
       .then(data => {
         setSubscriptions(data);

@@ -16,7 +16,7 @@ export default function AnimePage() {
   useEffect(() => {
     async function fetchMovies() {
       try {
-        const res = await fetch("http://localhost:3000/movies/list"); // Your backend API
+        const res = await fetch("https://streamora-fullstack-movie-app.onrender.com/movies/list"); // Your backend API
         const data = await res.json();
         setMovies(data);
       } catch (error) {

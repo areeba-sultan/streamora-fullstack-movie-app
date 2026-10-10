@@ -25,7 +25,7 @@ export default function HomeCarousel({
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const res = await fetch("http://localhost:3000/movies/list");
+        const res = await fetch("https://streamora-fullstack-movie-app.onrender.com/movies/list");
         const data = await res.json();
         setMoviesData(data);
       } catch (err) {
@@ -58,7 +58,7 @@ export default function HomeCarousel({
   }
 
   return (
-    <div className="w-full py-10 ">
+    <div className="w-full py-8 ">
       <div className="flex justify-between items-center px-4 mb-8">
         <h2 className={isTop10 ? "text-3xl font-bold text-white" : "text-3xl font-bold text-white mt-3"}>
           {heading}
@@ -96,21 +96,28 @@ export default function HomeCarousel({
 
                     <Link href={`/movies/${typePath}/${item.id}`} className="relative z-10 ml-14">
                       <motion.div whileHover={{ scale: 1.05 }} transition={{ duration: 0.25 }}>
-                        <div className="relative w-56 h-[230px] md:w-64 md:h-[250px] rounded-lg overflow-hidden shadow-xl">
-                          <Image
-                            src={item.image}
-                            alt={item.title}
-                            fill
-                            className="object-cover"
-                          />
-                          <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/10 to-transparent" />
-                          <div className="absolute bottom-2 left-2 right-2">
-                            <h3 className="text-base font-bold text-white leading-tight line-clamp-2">
-                              {item.title}
-                            </h3>
-                            <p className="text-sm text-gray-300 mt-0.5">{item.year}</p>
-                          </div>
-                        </div>
+                       <div>
+                   <div className="relative w-56 h-[230px] md:w-64 md:h-[250px] rounded-lg overflow-hidden shadow-xl">
+                   <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      className="object-cover"
+                         />
+                   </div>
+
+                     <div className="mt-7 text-white">
+                      <h3 className="text-base font-bold leading-tight line-clamp-2">
+                        {item.title}
+                      </h3>
+                      <p className="text-sm text-gray-400 mt-1">
+                         {item.year}
+                      </p>
+                      <p className="text-sm text-gray-400 mt-1">
+                          {item.genre}
+                          </p>
+                      </div>
+                    </div>
                       </motion.div>
                     </Link>
                   </motion.div>
@@ -122,7 +129,7 @@ export default function HomeCarousel({
             return (
               <CarouselItem
                 key={item.id}
-                className="pl-2 md:pl-4 basis-1/3 sm:basis-1/2 md:basis-1/3 lg:basis-1/5"
+                className="pl-6 md:pl-10 basis-3/4 sm:basis-1/2 md:basis-2/5 lg:basis-1/5"
               >
                 <Link href={`/movies/${typePath}/${item.id}`}>
                   <motion.div
@@ -132,7 +139,7 @@ export default function HomeCarousel({
                     transition={{ duration: 0.4, delay: idx * 0.05 }}
                   >
                     <Card className="bg-transparent shadow-none border-none">
-                      <div className="relative w-60 h-[300px] rounded-2xl overflow-hidden">
+                      <div className="relative w-full aspect-[2/3] max-w-[240px] rounded-2xl overflow-hidden">
                         {isNew && (
                           <span className="absolute top-2 left-2 z-10 rounded-md bg-red-600 px-2 py-0.5 text-xs font-bold text-white">
                             NEW
@@ -148,10 +155,10 @@ export default function HomeCarousel({
 
                       <CardContent className="p-2 text-white">
                         <p className="text-xs text-gray-400">{item.year}</p>
-                        <h3 className="text-lg font-semibold mt-1">
+                        <h3 className="text-lg font-semibold">
                           {item.title}
                         </h3>
-                        <p className="text-sm text-gray-400 mt-1">
+                        <p className="text-sm text-gray-400">
                           {item.genre}
                         </p>
                       </CardContent>

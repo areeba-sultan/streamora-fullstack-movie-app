@@ -70,7 +70,7 @@ export function HeroSlider() {
     try {
       const results = await Promise.all(
         FEATURED_IDS.map(async (id) => {
-          const res = await fetch(`http://localhost:3000/movies/${id}`, { signal });
+          const res = await fetch(`https://streamora-fullstack-movie-app.onrender.com/movies/${id}`, { signal });
           if (!res.ok) throw new Error(`Movie ${id} not found`);
           return res.json();
         })

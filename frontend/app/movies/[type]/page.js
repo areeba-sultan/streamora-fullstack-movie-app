@@ -18,7 +18,7 @@ const typeParam = params.type.toLowerCase(); // URL se type, e.g., "top-rated"
   useEffect(() => {
     async function fetchMovies() {
       try {
-        const res = await fetch("http://localhost:3000/movies/list"); // Replace with your backend URL
+        const res = await fetch("https://streamora-fullstack-movie-app.onrender.com/movies/list"); // Replace with your backend URL
         const data = await res.json();
         setMovies(data);
       } catch (error) {

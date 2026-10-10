@@ -41,6 +41,7 @@ const genres = [
 
 export default function Navbar() {
   const [activeGenre, setActiveGenre] = useState("All");
+  const [openProfile, setOpenProfile] = useState(false);
   const notificationCount = 3;
   const router = useRouter();
 
@@ -53,7 +54,14 @@ export default function Navbar() {
       router.push(`/genre/${genre.toLowerCase()}`);
     }
   };
+     const handleLogout = () => {
+  localStorage.clear();
+  sessionStorage.clear();
 
+  setTimeout(() => {
+    router.push("/user/signup");
+  }, 1500);
+};
   return (
     <motion.nav
       initial={{ y: -40, opacity: 0 }}
@@ -121,12 +129,35 @@ export default function Navbar() {
           </motion.button>
 
           <motion.div
+            onClick={() => setOpenProfile(!openProfile)}
             whileHover={{ scale: 1.04 }}
-            className="flex cursor-pointer items-center gap-2 rounded-lg border border-red-600/60 bg-red-600/10 px-2.5 py-1.5 transition-colors duration-200 hover:bg-red-600"
+            className="flex cursor-pointer items-center gap-2 rounded-lg border border-red-500/90 px-2.5 py-1.5 transition-all duration-200 hover:border-red-500/70 hover:bg-red-600/20"
           >
             <FaUserCircle className="text-xl text-white" />
             <FaChevronDown className="text-xs text-gray-300" />
           </motion.div>
+           {openProfile && (
+        <motion.div
+           nitial={{ opacity: 0, y: -5 }}
+           animate={{ opacity: 1, y: 0 }}
+           className="absolute right-0 top-10 mt-4 w-40 rounded-xl bg-black/60 backdrop-blur-md p-2 shadow-xl z-50"
+          >
+
+      <button
+      onClick={handleLogout}
+      className="
+        w-full rounded-lg px-4 py-2.5 
+        text-center text-sm font-medium text-gray-200
+        transition-all duration-200
+        hover:bg-red-600/70
+        hover:text-white
+      "
+    >
+      Logout
+    </button>
+    </motion.div>
+  )}
+
         </div>
       </div>
 

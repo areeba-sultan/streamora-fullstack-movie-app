@@ -42,7 +42,7 @@ export default function AddAdminPage() {
     try {
       const adminKey = localStorage.getItem("adminKey");
 
-      const res = await fetch("http://localhost:3000/admin/create", {
+      const res = await fetch("https://streamora-fullstack-movie-app.onrender.com/admin/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

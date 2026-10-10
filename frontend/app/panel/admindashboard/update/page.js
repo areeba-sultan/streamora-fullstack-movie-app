@@ -32,7 +32,7 @@ export default function UpdatePage() {
   const load = async () => {
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:3000/movies/list");
+      const res = await fetch("https://streamora-fullstack-movie-app.onrender.com/movies/list");
       const data = await res.json();
       setMovies(data || []);
     } catch (err) {
@@ -79,7 +79,7 @@ export default function UpdatePage() {
       const adminKey = localStorage.getItem("adminKey");
 
       const res = await fetch(
-        `http://localhost:3000/movies/update/${editMovie.id}`,
+        `https://streamora-fullstack-movie-app.onrender.com/movies/update/${editMovie.id}`,
         {
           method: "PUT",
           headers: {

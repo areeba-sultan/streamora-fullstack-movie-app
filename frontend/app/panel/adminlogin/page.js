@@ -14,7 +14,7 @@ export default function AdminLoginPage() {
     setError("");
 
     try {
-      const res = await fetch("http://localhost:3000/admin/login", {
+      const res = await fetch("https://streamora-fullstack-movie-app.onrender.com/admin/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
