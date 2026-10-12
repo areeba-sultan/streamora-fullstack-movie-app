@@ -11,6 +11,17 @@ Streamora is a full-stack movie streaming web application developed using **Next
 
 ---
 
+# 🔗 Project Links
+
+Live Website: https://streamora-fullstack-movie-app.vercel.app
+
+# 📸 Project Screenshots
+<img width="1872" height="902" alt="image" src="https://github.com/user-attachments/assets/fa61e4ba-95cb-4ab1-b3ff-6cb660717f03" />
+<img width="1895" height="901" alt="image" src="https://github.com/user-attachments/assets/8798bf6e-da97-4034-8fee-73ae38e0c428" />
+<img width="632" height="805" alt="image" src="https://github.com/user-attachments/assets/e44473cd-33c2-4722-9a56-d8d2467ae29f" />
+<img width="622" height="626" alt="image" src="https://github.com/user-attachments/assets/b4ca77be-7640-4308-a6ab-4f8342d083ce" />
+<img width="622" height="735" alt="image" src="https://github.com/user-attachments/assets/b0f9f774-ca3a-4197-b4d0-c811c8d0abcc" />
+
 # ✨ Features
 
 ## User Features
